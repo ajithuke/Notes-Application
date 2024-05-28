@@ -1,3 +1,7 @@
 .center{
     text-align: center;
 }
+
+.btn{
+    justify-content: flex-end
+}
