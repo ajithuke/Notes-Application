@@ -4,7 +4,7 @@ import App from "../App";
 
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB4IFnMYYRmfb6dVXgzk2PZ2tZzKyrMH3I",
@@ -63,10 +63,14 @@ const FirebaseProvider = () => {
         })
     }
 
+    const getNotes = async ()=>{
+        return await getDocs(collection(firestore,"notes"));
+    }
+
     const isLoggedIn = user ? true : false;
 
     return (
-        <FirebaseContext.Provider value={{ signInUser, signUpUser, signInWithGoogle, signOutUser, addNote, isLoggedIn }}>
+        <FirebaseContext.Provider value={{ signInUser, signUpUser, signInWithGoogle, signOutUser, addNote, getNotes, isLoggedIn }}>
             <App />
         </FirebaseContext.Provider>
     )
